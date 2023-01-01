@@ -17,6 +17,11 @@ def get_dataset(root, name, transform=NormalizeFeatures()):
 
     assert name in pyg_dataset_dict, "Dataset must be in {}".format(list(pyg_dataset_dict.keys()))
 
+    if name in ['coauthor-cs', 'coauthor-physics']: 
+        root = '/Dataset/PyG/Coauthor/Raw'
+    else:
+        raise AssertionError
+
     dataset_class, name = pyg_dataset_dict[name]
     dataset = dataset_class(root, name=name, transform=transform)
 
